@@ -1,0 +1,26 @@
+{
+  "name": "potatogam.es",
+  "version": "1.0.0",
+  "description": "PotatoGameDev",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PotatoGameDev/potatogam.es.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/PotatoGameDev/potatogam.es/issues"
+  },
+  "homepage": "https://github.com/PotatoGameDev/potatogam.es#readme",
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.5"
+  }
+}
