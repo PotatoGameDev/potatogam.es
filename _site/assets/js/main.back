@@ -1,0 +1,68 @@
+/* =============================================
+   POTATOGAMEDEV — main.js
+   ============================================= */
+
+// ── Fade-in on scroll ──────────────────────────
+const fadeEls = document.querySelectorAll('.fade-in');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.15 });
+fadeEls.forEach(el => observer.observe(el));
+
+// ── Card deck shuffle ─────────────────────────
+const cards  = Array.from(document.querySelectorAll('.game-card'));
+const counter = document.getElementById('deck-counter');
+let current = cards.length - 1; // top card index
+
+function updateDeck() {
+  cards.forEach((card, i) => {
+    card.classList.remove('active');
+    // stack offsets for non-active cards
+    const diff = i - current;
+    const rot  = diff * 3;
+    const yOff = Math.abs(diff) * 5;
+    card.style.transform = `rotate(${rot}deg) translateY(${yOff}px)`;
+    card.style.zIndex    = i;
+  });
+  cards[current].classList.add('active');
+  cards[current].style.transform = '';
+  if (counter) counter.textContent = `${current + 1} / ${cards.length}`;
+}
+
+document.getElementById('btn-next')?.addEventListener('click', () => {
+  current = (current + 1) % cards.length;
+  updateDeck();
+});
+
+document.getElementById('btn-prev')?.addEventListener('click', () => {
+  current = (current - 1 + cards.length) % cards.length;
+  updateDeck();
+});
+
+// Clicking a card brings it forward
+cards.forEach((card, i) => {
+  card.addEventListener('click', () => {
+    current = i;
+    updateDeck();
+  });
+});
+
+updateDeck();
+
+// ── Scroll hint fade out ──────────────────────
+// The hints fade as the user scrolls past each section
+const hints = document.querySelectorAll('.scroll-hint');
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  hints.forEach(hint => {
+    const section = hint.closest('section');
+    const sTop    = section.offsetTop;
+    const sH      = section.offsetHeight;
+    const progress = (scrollY - sTop) / sH;
+    hint.style.opacity = Math.max(0, 0.75 - progress * 4);
+  });
+}, { passive: true });
