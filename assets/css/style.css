@@ -1,0 +1,642 @@
+/* =============================================
+   POTATOGAMEDEV — style.css
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;800&display=swap');
+
+/* Vars */
+:root {
+	--soil: #101109;
+	--dirt: #2b1d0e;
+	--mud: #3d2b14;
+	--tan: #c8922a;
+	--gold: #e8b84b;
+	--cream: #f5e6c8;
+	--pale: #fdf6e8;
+	--accent: #e05c2a;
+	--accent2: #6dbf67;
+	--pixel-size: 4px;
+}
+
+/* - RESET */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	scroll-behavior: smooth;
+	scroll-snap-type: y mandatory;
+}
+
+body {
+	background: var(--soil);
+	color: var(--cream);
+	font-family: 'Nunito', sans-serif;
+	overflow-x: hidden;
+	cursor: default;
+}
+
+/* Pixel font helper */
+.pixel {
+	font-family: 'Press Start 2P', monospace;
+}
+
+/* Section */
+section {
+	min-height: 100vh;
+	scroll-snap-align: start;
+	position: relative;
+
+	/* flex: */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	padding: 4rem 2rem 6rem;
+	overflow: hidden;
+}
+
+/* Pixel-grid background */
+section::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+
+	background-image: linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+	background-size: 32px 32px;
+	pointer-events: none;
+}
+
+/* Scroll-down hint */
+
+.scroll-hint {
+	position: absolute;
+	bottom: 2rem;
+	left: 50%;
+	transform: translateX(-50%);
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.5rem;
+	color: var(--tan);
+	letter-spacing: 0.05em;
+	text-align: center;
+	opacity: 0.75;
+	animation: bounce 2s ease-in-out infinite;
+	white-space: nowrap;
+	line-height: 1.8;
+}
+
+.scroll-hint::after {
+	content: '';
+	display: block;
+	margin: 0.5rem auto 0;
+	width: 2px;
+	height: 24px;
+	background: linear-gradient(to bottom, var(--tan), transparent);
+}
+
+@keyframes bounce {
+
+	0%,
+	100% {
+		transform: translateX(-50%) translateY(0);
+	}
+
+	50% {
+		transform: translateX(-50%) translateY(6px);
+	}
+
+}
+
+/* SECTION 1 - HERO */
+
+#hero {
+	background: radial-gradient(ellipse at 60% 40%, var(--mud) 0%, #1a1109 70%);
+	gap: 0;
+}
+
+.hero-inner {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 3rem;
+	align-items: center;
+	max-width: 900px;
+	width: 100%;
+}
+
+.logo-wrap {
+	position: relative;
+}
+
+.logo-wrap img {
+	width: 160px;
+	height: 160px;
+	object-fit: contain;
+	image-rendering: pixelated;
+	filter: drop-shadow(0 0 24px rgba(200, 146, 42, 0.5));
+	animation: float 4s ease-in-out infinite;
+}
+
+@keyframes float {
+
+	0%,
+	100% {
+		transform: translateY(0px) rotate(-2deg);
+	}
+
+	50% {
+		transform: translateY(-10px) rotate(2deg);
+	}
+}
+
+.hero-text h1 {
+	font-family: 'Press Start 2P', monospace;
+	font-size: clamp(1rem, 3vw, 1.6rem);
+	color: var(--gold);
+	line-height: 1.6;
+	margin-bottom: 1.5rem;
+	text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+}
+
+.hero-text h1 span {
+	color: var(--accent);
+}
+
+.tagline {
+	font-size: clamp(0.95rem, 2vw, 1.15rem);
+	color: var(--cream);
+	line-height: 1.7;
+	max-width: 480px;
+	font-weight: 600;
+	opacity: 0.9;
+}
+
+.tagline strong {
+	color: var(--gold);
+}
+
+/* Screenshots strip */
+.screenshots {
+	display: flex;
+	gap: 1rem;
+	margin-top: 3rem;
+	max-width: 900px;
+	width: 100%;
+	overflow: hidden;
+}
+
+.screenshot-placeholder {
+	flex: 1;
+	aspect-ratio: 16/9;
+	background: var(--mud);
+	border: 2px solid var(--tan);
+	border-radius: 2px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.4rem;
+	color: var(--tan);
+	opacity: 0.6;
+	text-align: center;
+	padding: 1rem;
+	line-height: 1.8;
+	position: relative;
+	overflow: hidden;
+}
+
+/* decor */
+.screenshot-placeholder::before,
+.screenshot-placeholder::after {
+	content: '';
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	border-color: var(--gold);
+	border-style: solid;
+	opacity: 0.5;
+}
+
+.screenshot-placeholder::before {
+	top: 4px;
+	left: 4px;
+	border-width: 2px 0 0 2px;
+}
+
+.screenshot-placeholder::after {
+	bottom: 4px;
+	right: 4px;
+	border-width: 0 2px 2px 0;
+}
+
+/* SECTION 2 - CURRENT GAME */
+
+#current {
+	background: linear-gradient(160deg, #1e1208 0%, var(--dirt) 50%, #1a1109 100%);
+}
+
+.section-label {
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.5rem;
+	color: var(--accent);
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+	margin-bottom: 1rem;
+	opacity: 0.8;
+}
+
+.current-inner {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 4rem;
+	align-items: center;
+	max-width: 900px;
+	width: 100%;
+}
+
+.current-info h2 {
+	font-family: 'Press Start 2P', monospace;
+	font-size: clamp(1rem, 2.5vw, 1.4rem);
+	color: var(--gold);
+	line-height: 1.6;
+	margin-bottom: 1.5rem;
+	text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* TODO does this replace the color? */
+.current-info p {
+	font-size: 1rem;
+	line-height: 1.8;
+	color: var(--cream);
+	opacity: 0.85;
+	margin-bottom: 1.2rem;
+}
+
+.tag-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	margin-top: 1.5rem;
+}
+
+.tag {
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.4rem;
+	padding: 0.4rem 0.7rem;
+	background: var(--mud);
+	border: 1px solid var(--tan);
+	color: var(--tan);
+	letter-spacing: 0.05em;
+}
+
+.wip-badge {
+	display: inline-block;
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.45rem;
+	background: var(--accent);
+	color: white;
+	padding: 0.4rem 0.8rem;
+	margin-bottom: 1.2rem;
+	animation: blink 1.5s step-end infinite;
+}
+
+@keyframes blink {
+
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.4;
+	}
+}
+
+.current-visual {
+	aspect-ratio: 3/4;
+	background: var(--mud);
+	border: 2px solid var(--tan);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.45rem;
+	color: var(--tan);
+	opacity: 0.6;
+	line-height: 2;
+	text-align: center;
+	padding: 1.5rem;
+	position: relative;
+}
+
+.current-visual::before,
+.current-visual::after {
+	content: '';
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	border-color: var(--gold);
+	border-style: solid;
+	opacity: 0.4;
+}
+
+
+.current-visual::before {
+	top: 6px;
+	left: 6px;
+	border-width: 2px 0 0 2px;
+}
+
+.current-visual::after {
+	bottom: 6px;
+	right: 6px;
+	border-width: 0 2px 2px 0;
+}
+
+/* SECTION 3 - SHOWCASE */
+
+#showcase {
+	background: radial-gradient(ellipse at 30% 70%, #2b1d0e 0%, #1a1109 65%);
+	gap: 2rem;
+}
+
+#showcase h2 {
+	font-family: 'Press Start 2P', monospace;
+	font-size: clamp(0.9rem, 2.5vw, 1.3rem);
+	color: var(--gold);
+	text-align: center;
+	text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.6);
+	line-height: 1.6;
+}
+
+/* Card deck */
+.card-deck {
+	position: relative;
+	width: 320px;
+	height: 420px;
+	margin: 1rem auto;
+}
+
+.game-card {
+	position: absolute;
+	inset: 0;
+	background: var(--mud);
+	border: 2px solid var(--tan);
+	padding: 1.5rem;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	cursor: pointer;
+	transition: transform 0.4s cubic-bezier(.175, .885, .32, 1.275);
+	transform-origin: bottom center;
+	user-select: none;
+}
+
+.game-card:nth-child(1) {
+	transform: rotate(-6deg) translateY(10px);
+	z-index: 1;
+}
+
+.game-card:nth-child(2) {
+	transform: rotate(-2deg) translateY(5px);
+	z-index: 2;
+}
+
+.game-card:nth-child(3) {
+	transform: rotate(2deg);
+	z-index: 3;
+}
+
+.game-card:nth-child(4) {
+	transform: rotate(5deg) translateY(8px);
+	z-index: 1;
+}
+
+.game-card.active {
+	transform: rotate(0deg) translateY(-8px) !important;
+	z-index: 10 !important;
+	border-color: var(--gold);
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+}
+
+.card-thumb {
+	flex: 1;
+	background: rgba(255, 255, 255, 0.05);
+	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.4rem;
+	color: var(--tan);
+	opacity: 0.5;
+}
+
+.card-title {
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.55rem;
+	color: var(--gold);
+	line-height: 1.8;
+	margin-bottom: 0.4rem;
+}
+
+.card-desc {
+	font-size: 0.8rem;
+	color: var(--cream);
+	opacity: 0.7;
+	line-height: 1.5;
+}
+
+.deck-controls {
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+}
+
+.deck-btn {
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.5rem;
+	background: var(--mud);
+	border: 2px solid var(--tan);
+	color: var(--tan);
+	padding: 0.6rem 1rem;
+	cursor: pointer;
+	transition: all 0.15s;
+}
+
+.deck-btn:hover {
+	background: var(--tan);
+	color: var(--soil);
+}
+
+.deck-counter {
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.45rem;
+	color: var(--tan);
+	opacity: 0.7;
+}
+
+/* SECTION 4 - CONTACT ME, PLEASE... I AM SO ALONE ON THOSE STREAMS...*/
+
+#contact {
+	background: linear-gradient(180deg, #1a1109 0%, #0f0a05 100%);
+}
+
+.contact-inner {
+	text-align: center;
+	max-width: 600px;
+}
+
+.contact-inner .logo-small {
+	width: 80px;
+	image-rendering: pixelated;
+	margin-bottom: 2rem;
+	opacity: 0.9;
+	filter: drop-shadow(0 0 16px rgba(200, 146, 42, 0.4));
+}
+
+.contact-inner h2 {
+	font-family: 'Press Start 2P', monospace;
+	font-size: clamp(0.9rem, 2vw, 1.2rem);
+	color: var(--gold);
+	line-height: 1.8;
+	margin-bottom: 1rem;
+	text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.6);
+}
+
+.contact-inner p {
+	font-size: 1rem;
+	color: var(--cream);
+	opacity: 0.75;
+	line-height: 1.7;
+	margin-bottom: 2.5rem;
+}
+
+.link-grid {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	justify-content: center;
+
+	margin-bottom: 3rem;
+}
+
+.link-btn {
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.5rem;
+	padding: 0.8rem 1.2rem;
+	border: 2px solid;
+	text-decoration: none;
+	letter-spacing: 0.05em;
+	line-height: 1.8;
+	transition: all 0.15s;
+
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.link-btn.email {
+	border-color: var(--gold);
+	color: var(--gold);
+}
+
+.link-btn.itch {
+	border-color: #fa5c5c;
+	color: #fa5c5c;
+}
+
+.link-btn.twitter {
+	border-color: #1da1f2;
+	color: #1da1f2;
+}
+
+.link-btn.discord {
+	border-color: #7289da;
+	color: #7289da;
+}
+
+.link-btn.email:hover {
+	background: var(--gold);
+	color: var(--soil);
+}
+
+.link-btn.itch:hover {
+	background: #fa5c5c;
+	color: var(--soil);
+}
+
+.link-btn.twitter:hover {
+	background: #1da1f2;
+	color: var(--soil);
+}
+
+.link-btn.discord:hover {
+	background: #7289da;
+	color: var(--soil);
+}
+
+.footer-note {
+	font-family: 'Press Start 2P', monospace;
+	font-size: 0.4rem;
+	color: var(--tan);
+	opacity: 0.4;
+	line-height: 2;
+	letter-spacing: 0.05em;
+}
+
+/* Fade-in */
+.fade-in {
+	opacity: 0;
+	transform: translateY(24px);
+	transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+	opacity: 1;
+	transform: none;
+}
+
+/* media queries */
+@media (max-width: 700px) {
+	.hero-inner {
+		grid-template-columns: 1fr;
+		text-align: center;
+	}
+
+	.logo-wrap {
+		margin: 0 auto;
+	}
+
+	.tagline {
+		margin: 0 auto;
+	}
+
+	.screenshots {
+		flex-direction: column;
+	}
+
+	.current-inner {
+		grid-template-columns: 1fr;
+	}
+
+	.current-visual {
+		aspect-ratio: 16/9;
+	}
+
+	.card-deck {
+		width: 260px;
+		height: 340px;
+	}
+}
