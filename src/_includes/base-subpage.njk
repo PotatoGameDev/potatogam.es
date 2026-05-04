@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="{{ description or 'PotatoGameDev — fun-first indie games.' }}">
+	<title>{{ title }} — PotatoGameDev</title>
+
+	<link rel="icon" href="/assets/images/potato.png" type="image/png">
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="/assets/css/style.css">
+	<link rel="stylesheet" href="/assets/css/subpage.css">
+</head>
+
+<body class="subpage">
+
+	<!-- ── Nav bar ── -->
+	<nav class="subnav">
+		<a href="/" class="subnav-home">
+			<img src="/assets/images/potato.png" alt="PotatoGameDev">
+			<span class="pixel">POTATOGAMEDEV</span>
+		</a>
+		<span class="subnav-title pixel">{{ title }}</span>
+		<a href="/" class="subnav-back pixel">← HOME</a>
+	</nav>
+
+	<!-- ── Page content ── -->
+	<main class="subpage-main">
+		{{ content | safe }}
+	</main>
+
+	<!-- ── Footer ── -->
+	<footer class="subfooter">
+		<p class="pixel">© 2025 POTATOGAMEDEV</p>
+		<nav class="subfooter-links">
+			<a href="/">Home</a>
+			<a href="/#contact">Contact</a>
+		</nav>
+	</footer>
+
+	<script src="/assets/js/main.js"></script>
+</body>
+
+</html>
